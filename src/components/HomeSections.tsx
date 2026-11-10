@@ -19,7 +19,14 @@ const categories = [
   { title: "Business tools", copy: "Practical systems for teams and operations.", icon: Workflow },
   { title: "Management", copy: "Inventory, billing and business coordination.", icon: Boxes }
 ];
-const securityServices = ["Website security assessment", "Web application security", "API security review", "Vulnerability assessment", "Security hardening", "Authentication & access control"];
+const securityServices = [
+  "Penetration Testing (PTaaS)",
+  "External Attack Surface Management",
+  "DPDP Readiness & Privacy Assessment",
+  "AI-Powered Security Testing",
+  "Infrastructure & Network Security",
+  "Security Advisory & Remediation"
+];
 const devServices = [
   { title: "Web applications", copy: "Fast, accessible web experiences built around real business needs.", icon: Code2 },
   { title: "Mobile applications", copy: "Thoughtful mobile products for customers and internal teams.", icon: Smartphone },
@@ -41,9 +48,9 @@ const steps = [
   { n: "06", title: "Support", copy: "Keep learning, maintaining and improving.", icon: Headset }
 ];
 const faqs = [
-  ["What does ORBYT offer?", "ORBYT brings together software products, security services and custom development for businesses."],
+  ["What does QUBIXS offer?", "QUBIXS brings together software products, security services and custom development for businesses."],
   ["Can I request a demo before purchasing?", "Yes. Use the contact form to request a product walkthrough. Product availability and demo options will be confirmed individually."],
-  ["Do you build custom software?", "Yes. ORBYT can work with you to scope web applications, mobile applications, SaaS platforms and custom business software."],
+  ["Do you build custom software?", "Yes. QUBIXS can work with you to scope web applications, mobile applications, SaaS platforms and custom business software."],
   ["What is included in a security assessment?", "The scope is agreed before work begins. It can include defined application or API testing, findings, risk prioritisation and remediation guidance."],
   ["Are the products available to purchase now?", "The products currently shown are concept previews for the website prototype. Availability, pricing and purchase options will be published when each product is ready."]
 ];
@@ -85,11 +92,11 @@ export function IntroStrip() {
 }
 
 export function BrandIntro() {
-  return <section className="section"><div className="container grid-2" style={{ alignItems: "end" }}><SectionHeading kicker="A clearer way forward" title="Technology should make business simpler." /><div><p className="section-copy">ORBYT brings useful software products, security-minded engineering and custom development together. We focus on building digital tools that solve practical problems and create room for what comes next.</p><Link className="text-link" href="/about">Get to know ORBYT <ArrowUpRight size={15}/></Link></div></div></section>;
+  return <section className="section"><div className="container grid-2" style={{ alignItems: "end" }}><SectionHeading kicker="A clearer way forward" title="Technology should make business simpler." /><div><p className="section-copy">QUBIXS brings useful software products, security-minded engineering and custom development together. We focus on building digital tools that solve practical problems and create room for what comes next.</p><Link className="text-link" href="/about">Get to know QUBIXS <ArrowUpRight size={15}/></Link></div></div></section>;
 }
 
 export function FeaturedProducts() {
-  return <section className="section product-section"><div className="container"><div className="section-head"><SectionHeading kicker="The product universe" title="Useful tools. Thoughtfully built." copy="Explore the beginnings of the ORBYT product family. Each product is designed around a clear business need."/><Link className="btn btn-outline-dark" href="/products">View all products <ArrowUpRight size={15}/></Link></div><div className="grid-4">{products.map(p => <ProductCard key={p.slug} product={{...p}} />)}</div><p className="empty-note" style={{marginTop:18}}>Product previews are illustrative. Availability and pricing will be announced as products are released.</p></div></section>;
+  return <section className="section product-section"><div className="container"><div className="section-head"><SectionHeading kicker="The product universe" title="Useful tools. Thoughtfully built." copy="Explore the beginnings of the QUBIXS product family. Each product is designed around a clear business need."/><Link className="btn btn-outline-dark" href="/products">View all products <ArrowUpRight size={15}/></Link></div><div className="grid-4">{products.map(p => <ProductCard key={p.slug} product={{...p}} />)}</div><p className="empty-note" style={{marginTop:18}}>Product previews are illustrative. Availability and pricing will be announced as products are released.</p></div></section>;
 }
 
 export function ProductCategories() {
@@ -97,15 +104,49 @@ export function ProductCategories() {
 }
 
 export function SecuritySection() {
-  return <section className="section security-section"><div className="container security-layout"><div className="security-copy"><span className="section-kicker">Security services</span><h2 className="section-title">Security is not optional.</h2><p className="section-copy">Build with confidence through security-focused engineering, application assessments and practical protection guidance.</p><div className="service-list">{securityServices.map(s=><div className="service-item" key={s}><Check size={15}/>{s}</div>)}</div><Link className="btn btn-lime" href="/services/security">Explore security services <ArrowUpRight size={15}/></Link></div><div className="security-visual"><span className="security-chip one">THREAT AWARENESS</span><span className="security-chip two">LAYERED DEFENCE</span><span className="security-chip three">SECURE BY DESIGN</span><div className="shield-orb"><ShieldCheck size={68} strokeWidth={1.1}/></div></div></div></section>;
+  return (
+    <section className="section security-section">
+      <div className="container security-layout">
+        <div className="security-copy">
+          <span className="section-kicker">QUBIXS Security</span>
+          <h2 className="section-title">
+            Find the weaknesses.<br />
+            <span style={{ color: "var(--lime)" }}>Strengthen what matters.</span>
+          </h2>
+          <p className="section-copy">
+            Proactive cybersecurity for a connected world. QUBIXS combines expert-led penetration testing, external attack surface intelligence, privacy assessments and AI-powered security testing to help organisations stay ahead of evolving threats.
+          </p>
+          <div className="service-list">
+            {securityServices.map((s) => (
+              <div className="service-item" key={s}>
+                <Check size={15} />
+                {s}
+              </div>
+            ))}
+          </div>
+          <Link className="btn btn-lime" href="/services/security">
+            Explore security services <ArrowUpRight size={15} />
+          </Link>
+        </div>
+        <div className="security-visual">
+          <span className="security-chip one">RISK-LED ASSESSMENTS</span>
+          <span className="security-chip two">ATTACK SURFACE</span>
+          <span className="security-chip three">ACTIONABLE REPORTING</span>
+          <div className="shield-orb">
+            <ShieldCheck size={68} strokeWidth={1.1} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export function DevelopmentSection() {
   return <section className="section development-section"><div className="container"><div className="section-head"><SectionHeading kicker="Development services" title="Ideas deserve better technology." copy="From a focused website to a full digital product, turn your next idea into a useful experience."/></div><div className="grid-4">{devServices.map(({title,copy,icon:Icon})=><article className="card dev-card" key={title}><div className="dev-icon"><Icon size={22}/></div><h3>{title}</h3><p>{copy}</p></article>)}</div><div style={{marginTop:30}}><Link className="text-link" href="/services/development">Explore development services <ArrowUpRight size={15}/></Link></div></div></section>;
 }
 
-export function WhyOrbyt() {
-  return <section className="section why-section"><div className="container"><div className="section-head"><SectionHeading kicker="The ORBYT approach" title="Thoughtful technology. Clear outcomes."/></div><div className="grid-4">{benefits.map(({title,copy,icon:Icon})=><article className="why-card" key={title}><Icon size={24}/><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>;
+export function WhyQubixs() {
+  return <section className="section why-section"><div className="container"><div className="section-head"><SectionHeading kicker="The QUBIXS approach" title="Thoughtful technology. Clear outcomes."/></div><div className="grid-4">{benefits.map(({title,copy,icon:Icon})=><article className="why-card" key={title}><Icon size={24}/><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>;
 }
 
 export function WorkProcess() {
@@ -117,7 +158,7 @@ export function CaseStudies() {
 }
 
 export function Testimonials() {
-  return <section className="section testimonial-section"><div className="container"><div className="section-head"><SectionHeading kicker="Working together" title="Built through collaboration." copy="Great digital products come from clear communication and shared goals."/></div><div className="card quote-card"><div className="quote-stars"><Star size={14}/><Star size={14}/><Star size={14}/><Star size={14}/><Star size={14}/></div><blockquote>“Your next project story could live here. Add genuine customer feedback once you have permission to publish it.”</blockquote><div className="quote-person"><div className="avatar">OR</div><div><strong>Client testimonial</strong><small>Replace with an approved customer quote</small></div></div></div></div></section>;
+  return <section className="section testimonial-section"><div className="container"><div className="section-head"><SectionHeading kicker="Working together" title="Built through collaboration." copy="Great digital products come from clear communication and shared goals."/></div><div className="card quote-card"><div className="quote-stars"><Star size={14}/><Star size={14}/><Star size={14}/><Star size={14}/><Star size={14}/></div><blockquote>“Your next project story could live here. Add genuine customer feedback once you have permission to publish it.”</blockquote><div className="quote-person"><div className="avatar">QX</div><div><strong>Client testimonial</strong><small>Replace with an approved customer quote</small></div></div></div></div></section>;
 }
 
 export function FAQSection() {

@@ -12,11 +12,11 @@ export function Footer() {
             <p>Software products, digital security and thoughtful technology solutions for businesses ready to move forward.</p>
             <Link className="text-link" href="/contact">Start a conversation <ArrowUpRight size={14} /></Link>
           </div>
-          <div className="footer-col"><h4>Explore</h4><Link href="/products">Products</Link><Link href="/about">About ORBYT</Link><Link href="/contact">Contact</Link></div>
+          <div className="footer-col"><h4>Explore</h4><Link href="/products">Products</Link><Link href="/about">About QUBIXS</Link><Link href="/contact">Contact</Link></div>
           <div className="footer-col"><h4>Services</h4><Link href="/services/security">Security</Link><Link href="/services/development">Development</Link></div>
           <div className="footer-col"><h4>Information</h4><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms of use</Link><Link href="/refund-policy">Refund policy</Link></div>
         </div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} ORBYT. All rights reserved.</span><span>Build. Secure. Evolve.</span></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} QUBIXS. All rights reserved.</span><span>Build. Secure. Evolve.</span></div>
       </div>
     </footer>
   );

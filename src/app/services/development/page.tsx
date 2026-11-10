@@ -12,7 +12,7 @@ const items = [
 ] as const;
 
 export default function DevelopmentPage() {
-  return <SubpageLayout kicker="Development services" title="Turn your idea into something useful." description="From focused websites to custom digital products, ORBYT helps shape and build technology around real business needs.">
+  return <SubpageLayout kicker="Development services" title="Turn your idea into something useful." description="From focused websites to custom digital products, QUBIXS helps shape and build technology around real business needs.">
     <div className="grid-3">{items.map(([title,copy,Icon])=><article className="card dev-card" key={title}><div className="dev-icon"><Icon size={22}/></div><h3>{title}</h3><p>{copy}</p></article>)}</div>
     <div style={{marginTop:45}}><Link className="btn btn-dark" href="/contact">Discuss your project <ArrowUpRight size={15}/></Link></div>
   </SubpageLayout>;

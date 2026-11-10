@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ORBYT Security — expert-led penetration testing, external attack surface management, DPDP readiness and AI-powered security testing.">
+  <meta name="theme-color" content="#0b0912">
+  <title>ORBYT Security | Build. Secure. Evolve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0912;
+      --surface: #12101b;
+      --surface-2: #191526;
+      --line: rgba(190,160,255,.14);
+      --text: #f8f6ff;
+      --muted: #aaa4b8;
+      --purple: #9a63ff;
+      --purple-2: #7138d4;
+      --cyan: #b69aff;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "DM Sans", sans-serif; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin: auto; }
+    .topline { height: 3px; background: linear-gradient(90deg, var(--purple-2), #b69aff, var(--purple)); }
+    .scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 3px; z-index: 100; background: linear-gradient(90deg,#7138d4,#c3a6ff); box-shadow: 0 0 14px rgba(154,99,255,.7); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; }
+    }
+    header {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px);
+      background: rgba(9,8,18,.82); border-bottom: 1px solid var(--line);
+    }
+    .nav { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-family: Manrope, sans-serif; font-weight: 800; letter-spacing: .16em; font-size: 22px; }
+    .brand-mark {
+      width: 34px; height: 34px; border: 2px solid var(--purple); border-radius: 11px;
+      display: grid; place-items: center; transform: rotate(45deg);
+      box-shadow: 0 0 24px rgba(155,108,255,.25);
+    }
+    .brand-mark span { transform: rotate(-45deg); font-size: 17px; color: #cdb8ff; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: #cbc7d8; font-size: 13px; }
+    .nav-links a:hover { color: white; }
+    .nav-cta, .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border-radius: 8px; padding: 12px 18px; font-weight: 700; font-size: 13px;
+      transition: .2s ease; cursor: pointer;
+    }
+    .nav-cta, .btn-primary { background: linear-gradient(110deg, #9b6cff, #7046dc); color: white; box-shadow: 0 8px 28px rgba(112,70,220,.22); }
+    .nav-cta:hover, .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(112,70,220,.35); }
+    .btn-secondary { border: 1px solid rgba(255,255,255,.2); color: white; background: rgba(255,255,255,.035); }
+    .btn-secondary:hover { border-color: var(--purple); background: rgba(155,108,255,.08); }
+    .menu-btn { display: none; background: none; color: white; border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; }
+    .hero {
+      position: relative; overflow: hidden; padding: 112px 0 96px;
+      background: radial-gradient(ellipse at 78% 35%, rgba(117,74,210,.22), transparent 38%),
+                  radial-gradient(ellipse at 10% 70%, rgba(65,174,195,.09), transparent 30%);
+    }
+    .hero:before {
+      content: ""; position: absolute; inset: 0; opacity: .22; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 56px 56px; mask-image: linear-gradient(to bottom, black, transparent 88%);
+      animation: gridDrift 24s linear infinite;
+    }
+    .hero:after { content:""; position:absolute; width:520px; height:520px; border-radius:50%; right:-180px; top:-230px; background:rgba(130,78,230,.13); filter:blur(90px); animation: glowFloat 11s ease-in-out infinite alternate; pointer-events:none; }
+    @keyframes gridDrift { from { background-position:0 0; } to { background-position:56px 56px; } }
+    @keyframes glowFloat { from { transform:translate3d(-20px,10px,0) scale(.9); } to { transform:translate3d(20px,55px,0) scale(1.12); } }
+    @keyframes orbitPulse { 0%,100% { box-shadow:0 0 70px rgba(117,74,210,.12), inset 0 0 55px rgba(117,74,210,.08); } 50% { box-shadow:0 0 115px rgba(117,74,210,.25), inset 0 0 75px rgba(117,74,210,.12); } }
+    @keyframes floatY { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+    @keyframes spinSlow { to { transform:rotate(360deg); } }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; gap: 58px; align-items: center; }
+    .eyebrow { color: #c7afff; text-transform: uppercase; letter-spacing: .19em; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .eyebrow:before { content: ""; width: 25px; height: 1px; background: var(--purple); }
+    h1,h2,h3,h4 { font-family: Manrope, sans-serif; line-height: 1.15; margin: 0; letter-spacing: -.035em; }
+    h1 { font-size: clamp(44px, 6vw, 72px); max-width: 720px; margin: 22px 0; }
+    .gradient-text { background: linear-gradient(100deg, #cbb4ff 5%, #8e6aff 55%, #75dce7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 590px; color: #b9b4c9; font-size: 17px; }
+    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; margin: 30px 0 34px; }
+    .trust-line { display: flex; flex-wrap: wrap; gap: 18px; color: #918ba4; font-size: 11px; letter-spacing: .03em; }
+    .trust-line span:before { content: "✓"; color: var(--cyan); margin-right: 8px; }
+    .hero-visual { min-height: 420px; position: relative; display: grid; place-items: center; }
+    .orbit {
+      width: min(390px, 90%); aspect-ratio: 1; border: 1px solid rgba(179,147,255,.25); border-radius: 50%;
+      position: relative; display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(126,82,221,.16), rgba(126,82,221,.025) 52%, transparent 70%);
+      box-shadow: 0 0 100px rgba(117,74,210,.13), inset 0 0 55px rgba(117,74,210,.08);
+      animation: orbitPulse 5s ease-in-out infinite;
+    }
+    .orbit:before,.orbit:after { content: ""; position: absolute; border: 1px solid rgba(179,147,255,.18); border-radius: 50%; }
+    .orbit:before { inset: 34px; animation:spinSlow 32s linear infinite; border-style:dashed; } .orbit:after { inset: 76px; animation:spinSlow 24s linear infinite reverse; }
+    .core {
+      width: 124px; height: 124px; border-radius: 32px; transform: rotate(45deg);
+      display: grid; place-items: center; background: linear-gradient(145deg, #a77cff, #5834b9);
+      box-shadow: 0 0 70px rgba(155,108,255,.55);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    .core span { transform: rotate(-45deg); font: 800 35px Manrope; color: white; letter-spacing: -.08em; }
+    .orbit-dot { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); }
+    .dot-one { top: 15%; left: 24%; } .dot-two { right: 7%; top: 48%; background: var(--purple); box-shadow: 0 0 18px var(--purple); }
+    .dot-three { bottom: 12%; left: 42%; }
+    .float-card {
+      position: absolute; animation: floatY 6s ease-in-out infinite;
+     background: rgba(22,20,39,.92); border: 1px solid rgba(255,255,255,.13);
+      border-radius: 12px; padding: 13px 16px; box-shadow: 0 15px 45px rgba(0,0,0,.28);
+      backdrop-filter: blur(12px); font-size: 11px; color: #aaa5bc;
+    }
+    .float-card strong { display: block; color: white; font: 700 13px Manrope; margin-bottom: 3px; }
+    .float-a { top: 42px; left: 0; animation-delay:-1.5s; } .float-b { right: -4px; bottom: 45px; animation-delay:-3s; }
+    .section { padding: 100px 0; }
+    .section-alt { background: #0e0d19; border-top: 1px solid rgba(255,255,255,.045); border-bottom: 1px solid rgba(255,255,255,.045); }
+    .section-head { max-width: 720px; margin-bottom: 42px; }
+    .section-head h2 { font-size: clamp(32px, 4vw, 48px); margin: 15px 0; }
+    .section-head p { color: var(--muted); margin: 0; font-size: 15px; }
+    .service-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .service-card {
+      background: linear-gradient(145deg, rgba(25,23,43,.94), rgba(16,15,29,.96));
+      border: 1px solid var(--line); border-radius: 14px; padding: 25px; min-height: 255px;
+      transition: .25s ease; position: relative; overflow: hidden;
+    }
+    .service-card:hover { transform: translateY(-8px); border-color: rgba(155,108,255,.65); box-shadow: 0 24px 55px rgba(72,38,130,.24); }
+    .service-card:after { content: ""; position: absolute; width: 140px; height: 140px; right: -75px; bottom: -90px; border-radius: 50%; background: rgba(155,108,255,.10); filter: blur(5px); }
+    .icon {
+      width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px;
+      color: #cbb5ff; background: rgba(155,108,255,.12); border: 1px solid rgba(155,108,255,.2); font-size: 20px; margin-bottom: 22px;
+      transition: transform .35s ease, background .35s ease;
+    }
+    .service-card:hover .icon { transform: rotate(-8deg) scale(1.08); background:rgba(155,108,255,.2); }
+    .service-card h3 { font-size: 19px; margin-bottom: 10px; }
+    .service-card p { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+    .text-link { color: #c6adff; font-size: 12px; font-weight: 700; }
+    .text-link span { margin-left: 6px; }
+    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: start; }
+    .split h2 { font-size: clamp(32px, 4vw, 46px); margin: 14px 0 18px; }
+    .split p { color: var(--muted); font-size: 14px; }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 26px; }
+    .feature { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.025); color: #ddd8eb; font-size: 12px; }
+    .feature:before { content: "↗"; color: var(--cyan); margin-right: 9px; }
+    .process { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; counter-reset: step; }
+    .process-item { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.025); counter-increment: step; }
+    .process-item:before { content: "0" counter(step); color: var(--purple); font: 800 23px Manrope; display: block; margin-bottom: 22px; }
+    .process-item h3 { font-size: 16px; margin-bottom: 8px; }
+    .process-item p { color: var(--muted); font-size: 12px; margin: 0; }
+    .method-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
+    .method { text-align: center; border: 1px solid var(--line); border-radius: 10px; padding: 17px 10px; color: #d8d2e7; background: rgba(255,255,255,.025); font: 700 12px Manrope; }
+    .method small { display: block; color: #8f899f; font: 400 10px "DM Sans"; margin-top: 5px; }
+    .ai-panel {
+      border: 1px solid rgba(155,108,255,.28); border-radius: 18px; padding: 42px;
+      background: radial-gradient(circle at 85% 10%, rgba(155,108,255,.17), transparent 35%), linear-gradient(130deg,#171329,#11101c);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+    }
+    .ai-panel h2 { font-size: clamp(30px,4vw,44px); margin: 14px 0; }
+    .ai-panel p { color: var(--muted); font-size: 14px; }
+    .ai-points { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    .ai-point { border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 9px; padding: 14px; font-size: 12px; color: #ded9eb; }
+    .ai-point:before { content: "✦"; color: var(--cyan); margin-right: 8px; }
+    .compliance-note { margin-top: 20px; padding: 14px 16px; border-left: 2px solid var(--cyan); background: rgba(104,217,232,.055); color: #aaa6bd; font-size: 11px; }
+    .cta-band { padding: 65px 0; background: linear-gradient(105deg, #2b1b50, #17142b 60%, #10252b); border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }
+    .cta-inner { display: flex; justify-content: space-between; align-items: center; gap: 28px; }
+    .cta-inner h2 { font-size: clamp(28px,4vw,40px); margin-bottom: 9px; }
+    .cta-inner p { color: #c0bbce; margin: 0; font-size: 14px; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 65px; }
+    .contact-info h2 { font-size: 42px; margin: 14px 0; }
+    .contact-info p { color: var(--muted); font-size: 14px; }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1/-1; }
+    label { color: #c9c4d7; font-size: 11px; font-weight: 700; }
+    input, textarea, select { width: 100%; background: #141321; border: 1px solid rgba(255,255,255,.13); color: white; border-radius: 8px; padding: 13px 14px; outline: none; font-size: 13px; }
+    input:focus, textarea:focus, select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(155,108,255,.1); }
+    textarea { min-height: 115px; resize: vertical; }
+    select option { background: #141321; }
+    .form-status { grid-column: 1/-1; color: var(--cyan); font-size: 12px; min-height: 18px; }
+    footer { padding: 35px 0; border-top: 1px solid var(--line); color: #88839a; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: white; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 15px; } .hero-grid { gap: 25px; } .service-grid { grid-template-columns: repeat(2,1fr); }
+      .split { gap: 35px; } .process { grid-template-columns: repeat(2,1fr); } .method-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .nav { height: 68px; } .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 20px 24px 24px; background: #100f1c; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      .nav-links.open { display: flex; } .nav-links a { padding: 7px 0; } .nav-cta { text-align: center; }
+      .hero { padding: 75px 0 55px; } .hero-grid, .split, .ai-panel, .contact-grid { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 330px; } .orbit { width: 285px; } .core { width: 95px; height: 95px; border-radius: 25px; } .core span { font-size: 28px; }
+      .float-a { left: 0; top: 20px; } .float-b { right: 0; bottom: 18px; }
+      .section { padding: 70px 0; } .service-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: auto; } .process { grid-template-columns: 1fr 1fr; }
+      .method-grid { grid-template-columns: 1fr 1fr; } .ai-panel { padding: 25px; }
+      .cta-inner, .footer-inner { flex-direction: column; align-items: flex-start; }
+      .contact-form { grid-template-columns: 1fr; } .field.full, .form-status { grid-column: auto; }
+      .feature-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="topline"></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="ORBYT home">
+        <span class="brand-mark"><span>O</span></span> ORBYT
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#asm">Attack Surface</a>
+        <a href="#dpdp">DPDP</a>
+        <a href="#ai">AI Security</a>
+        <a href="#methodology">Methodology</a>
+        <a class="nav-cta" href="#contact">Talk to an Expert ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">ORBYT SECURITY</div>
+          <h1>Find the weaknesses.<br><span class="gradient-text">Strengthen what matters.</span></h1>
+          <p class="hero-copy">Proactive cybersecurity for a connected world. ORBYT combines expert-led penetration testing, external attack surface intelligence, privacy assessments and AI-powered security testing to help organisations stay ahead of evolving threats.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Discuss your security needs <span>↗</span></a>
+            <a class="btn btn-secondary" href="#services">Explore our services</a>
+          </div>
+          <div class="trust-line">
+            <span>Risk-led assessments</span><span>Recognised methodologies</span><span>Actionable reporting</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="ORBYT security visual">
+          <div class="orbit">
+            <i class="orbit-dot dot-one"></i><i class="orbit-dot dot-two"></i><i class="orbit-dot dot-three"></i>
+            <div class="core"><span>O.</span></div>
+          </div>
+          <div class="float-card float-a"><strong>ATTACK SURFACE</strong>Discover external exposure</div>
+          <div class="float-card float-b"><strong>SECURITY VALIDATION</strong>Test. Verify. Improve.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">WHAT WE DO</div>
+          <h2>Security built around <span class="gradient-text">real-world risk.</span></h2>
+          <p>From individual applications to enterprise infrastructure, our services help you understand exposure, validate security controls and prioritise remediation.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="icon">⌘</div><h3>Penetration Testing</h3>
+            <p>Expert-led security testing across web applications, APIs, thick clients, mobile apps and enterprise networks.</p>
+            <a class="text-link" href="#pentest">Explore testing services <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="icon">◎</div><h3>External Attack Surface Management</h3>
+            <p>Discover internet-facing assets, exposed services and security weaknesses without requiring internal credentials.</p>
+            <a class="text-link" href="#asm">Explore attack surface management <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="icon">◇</div><h3>DPDP Readiness Assessment</h3>
+            <p>Assess privacy practices and technical safeguards against applicable requirements of India's DPDP framework.</p>
+            <a class="text-link" href="#dpdp">Explore DPDP assessment <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="icon">✳</div><h3>AI-Powered Security Testing</h3>
+            <p>Accelerate approved security workflows with AI-assisted reconnaissance, test orchestration and finding analysis.</p>
+            <a class="text-link" href="#ai">Explore AI security <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="icon">⌁</div><h3>Infrastructure & Network Security</h3>
+            <p>Evaluate internal and external networks, Active Directory, servers, cloud environments and perimeter controls.</p>
+            <a class="text-link" href="#infrastructure">Explore infrastructure security <span>→</span></a>
+          </article>
+          <article class="service-card">
+            <div class="icon">↗</div><h3>Security Advisory</h3>
+            <p>Turn assessment results into practical remediation plans, security improvements and measurable risk reduction.</p>
+            <a class="text-link" href="#contact">Speak with our team <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="pentest">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">PENETRATION TESTING AS A SERVICE</div>
+          <h2>Think like an attacker. <span class="gradient-text">Defend with confidence.</span></h2>
+          <p>We simulate realistic attack techniques to identify exploitable weaknesses, demonstrate business impact and provide clear, prioritised remediation guidance. Engagements are tailored to your technology, risk profile and testing objectives.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#contact">Request a penetration test ↗</a></div>
+        </div>
+        <div>
+          <div class="feature-list">
+            <div class="feature">Web application penetration testing</div>
+            <div class="feature">REST, GraphQL and API testing</div>
+            <div class="feature">Thick client security testing</div>
+            <div class="feature">Android and iOS security testing</div>
+            <div class="feature">Internal network penetration testing</div>
+            <div class="feature">External network penetration testing</div>
+            <div class="feature">Active Directory assessments</div>
+            <div class="feature">Retesting and remediation validation</div>
+          </div>
+          <p><strong style="color:#eee9fa">Engagement models:</strong> Black Box · Grey Box · White Box · Retesting · Recurring PTaaS</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="asm">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">EXTERNAL ATTACK SURFACE MANAGEMENT</div>
+          <h2>See your organisation the way <span class="gradient-text">attackers see it.</span></h2>
+          <p>Your digital footprint changes constantly. Forgotten subdomains, exposed services, unmanaged assets and misconfigurations can create paths into your organisation. ORBYT helps map and monitor your public-facing exposure, starting with an authorised domain or asset.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#contact">Discover your attack surface ↗</a></div>
+          <p style="font-size:11px">Designed for external discovery without internal credentials or initial agent deployment.</p>
+        </div>
+        <div>
+          <div class="feature-list">
+            <div class="feature">Domain and subdomain discovery</div>
+            <div class="feature">Public IP and service discovery</div>
+            <div class="feature">Technology fingerprinting</div>
+            <div class="feature">Cloud exposure indicators</div>
+            <div class="feature">TLS and security configuration review</div>
+            <div class="feature">Known vulnerability identification</div>
+            <div class="feature">Exposed service monitoring</div>
+            <div class="feature">Risk-ranked exposure reporting</div>
+          </div>
+          <p>Our approach combines passive reconnaissance with carefully controlled, authorised active validation. Internal-only assets and authenticated configuration reviews require separate access and scope.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="dpdp">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">PRIVACY & DATA PROTECTION</div>
+          <h2>Make data protection <span class="gradient-text">part of the design.</span></h2>
+          <p>ORBYT helps organisations assess privacy processes and technical safeguards in the context of India's Digital Personal Data Protection Act, 2023 and applicable DPDP Rules, 2025. We identify gaps, test security controls and help teams prioritise improvements.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#contact">Discuss a DPDP assessment ↗</a></div>
+        </div>
+        <div>
+          <div class="feature-list">
+            <div class="feature">Privacy notice and consent review</div>
+            <div class="feature">Personal data inventory and mapping</div>
+            <div class="feature">Data minimisation and retention</div>
+            <div class="feature">Access control and encryption</div>
+            <div class="feature">Data principal rights workflows</div>
+            <div class="feature">Breach response readiness</div>
+            <div class="feature">Third-party and processor controls</div>
+            <div class="feature">Technical personal data exposure testing</div>
+          </div>
+          <div class="compliance-note">ORBYT provides technical assessments and DPDP readiness support, not statutory certification or a guarantee of legal compliance. Legal interpretation and formal compliance decisions should be reviewed by qualified privacy and legal professionals.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ai">
+      <div class="container">
+        <div class="ai-panel">
+          <div>
+            <div class="eyebrow">AI-POWERED SECURITY</div>
+            <h2>Move security testing forward with <span class="gradient-text">intelligent automation.</span></h2>
+            <p>Combine AI-assisted reasoning with established security tools and expert validation. ORBYT's autonomous testing approach helps teams accelerate discovery, correlate signals and focus attention on meaningful risks — with human oversight and defined testing boundaries.</p>
+            <a class="btn btn-primary" href="#contact">Explore AI security testing ↗</a>
+          </div>
+          <div class="ai-points">
+            <div class="ai-point">AI-assisted reconnaissance</div>
+            <div class="ai-point">Intelligent test orchestration</div>
+            <div class="ai-point">Contextual vulnerability analysis</div>
+            <div class="ai-point">Attack path correlation</div>
+            <div class="ai-point">Finding validation support</div>
+            <div class="ai-point">AI-assisted reporting</div>
+            <div class="ai-point">Controlled continuous testing</div>
+            <div class="ai-point">Human-reviewed outcomes</div>
+          </div>
+        </div>
+        <div style="margin-top:28px">
+          <div class="section-head" style="margin-bottom:20px">
+            <div class="eyebrow">AI APPLICATION SECURITY</div>
+            <h2 style="font-size:30px">Secure the AI you build and deploy.</h2>
+            <p>Assess LLM-powered applications, agents and retrieval workflows for risks such as prompt injection, sensitive information disclosure, insecure output handling, excessive agency, RAG data exposure and unsafe tool invocation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="infrastructure">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">INFRASTRUCTURE & NETWORK SECURITY</div>
+          <h2>Strengthen the systems <span class="gradient-text">behind your business.</span></h2>
+          <p>Assess the resilience of enterprise infrastructure, identity environments and network boundaries through controlled security testing.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature">Internal and external network assessments</div>
+          <div class="feature">Active Directory security assessments</div>
+          <div class="feature">Windows and Linux server reviews</div>
+          <div class="feature">Firewall and perimeter configuration review</div>
+          <div class="feature">Cloud infrastructure security assessment</div>
+          <div class="feature">Privilege escalation and lateral movement testing</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="methodology">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">A STRUCTURED APPROACH</div>
+          <h2>Methodical testing. <span class="gradient-text">Evidence-led outcomes.</span></h2>
+          <p>Every engagement begins with clear authorisation and scope. Testing is adapted to the target technology and aligned with relevant industry guidance.</p>
+        </div>
+        <div class="process">
+          <div class="process-item"><h3>Pre-engagement</h3><p>Confirm objectives, assets, authorisation, constraints and rules of engagement.</p></div>
+          <div class="process-item"><h3>Reconnaissance</h3><p>Discover assets, enumerate services and understand the technology landscape.</p></div>
+          <div class="process-item"><h3>Threat modelling</h3><p>Identify critical assets, trust boundaries and realistic attack scenarios.</p></div>
+          <div class="process-item"><h3>Vulnerability analysis</h3><p>Identify and analyse potential weaknesses using manual and automated techniques.</p></div>
+          <div class="process-item"><h3>Controlled validation</h3><p>Validate findings safely within the approved scope and testing window.</p></div>
+          <div class="process-item"><h3>Impact assessment</h3><p>Evaluate demonstrated impact and relevant attack paths without exceeding authorisation.</p></div>
+          <div class="process-item"><h3>Reporting</h3><p>Deliver evidence, risk ratings, business impact and practical remediation advice.</p></div>
+          <div class="process-item"><h3>Retesting</h3><p>Verify fixes and provide a clear view of remediation status.</p></div>
+        </div>
+        <div style="margin-top:42px">
+          <div class="eyebrow" style="margin-bottom:18px">REFERENCE FRAMEWORKS & STANDARDS</div>
+          <div class="method-grid">
+            <div class="method">OWASP WSTG<small>Web testing</small></div>
+            <div class="method">OWASP ASVS<small>Application verification</small></div>
+            <div class="method">OWASP API Top 10<small>API security</small></div>
+            <div class="method">OWASP MASVS / MASTG<small>Mobile security</small></div>
+            <div class="method">PTES<small>Penetration testing</small></div>
+            <div class="method">NIST SP 800-115<small>Security assessment</small></div>
+            <div class="method">MITRE ATT&CK<small>Adversary techniques</small></div>
+            <div class="method">OWASP GenAI / LLM Top 10<small>AI application security</small></div>
+            <div class="method">CVSS<small>Severity scoring</small></div>
+            <div class="method">DPDP Act & Rules<small>Privacy readiness context</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <div><h2>Make your next move a secure one.</h2><p>Talk to ORBYT about your security goals, testing scope or exposure concerns.</p></div>
+        <a class="btn btn-primary" href="#contact">Start a conversation ↗</a>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <div class="eyebrow">LET'S TALK SECURITY</div>
+          <h2>Start with a <span class="gradient-text">conversation.</span></h2>
+          <p>Tell us what you want to protect. Our team can help define an appropriate assessment, scope and next steps.</p>
+          <p style="margin-top:28px;color:#d9d3e8"><strong>ORBYT Security</strong><br>Build. Secure. Evolve.</p>
+          <p style="font-size:11px">Replace this placeholder contact form action with your business email, CRM or backend endpoint before publishing.</p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="field"><label for="name">Full name</label><input id="name" name="name" placeholder="Your name" required></div>
+          <div class="field"><label for="company">Company</label><input id="company" name="company" placeholder="Organisation"></div>
+          <div class="field"><label for="email">Business email</label><input id="email" name="email" type="email" placeholder="you@company.com" required></div>
+          <div class="field"><label for="service">Service of interest</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>Penetration Testing</option><option>External Attack Surface Management</option>
+              <option>DPDP Readiness Assessment</option><option>AI Security Testing</option>
+              <option>Infrastructure & Network Security</option><option>Security Advisory</option>
+            </select>
+          </div>
+          <div class="field full"><label for="message">Tell us about your requirements</label><textarea id="message" name="message" placeholder="Briefly describe your environment, objectives or preferred timeline."></textarea></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Prepare enquiry ↗</button></div>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> ORBYT. All rights reserved. <span style="color:#c4b0ff">BUILD. SECURE. EVOLVE.</span></div>
+      <div class="footer-links"><a href="#services">Services</a><a href="#methodology">Methodology</a><a href="#contact">Contact</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal sections and cards as the visitor scrolls.
+    const revealTargets = document.querySelectorAll(
+      '.section-head, .service-card, .split > div, .process-item, .method, .ai-panel, .cta-inner, .contact-info, .contact-form'
+    );
+    revealTargets.forEach((element, index) => {
+      element.classList.add(index % 3 === 1 ? 'reveal-left' : (index % 3 === 2 ? 'reveal-right' : 'reveal'));
+      if (element.classList.contains('service-card') || element.classList.contains('process-item') || element.classList.contains('method')) {
+        element.style.transitionDelay = (index % 4) * 75 + 'ms';
+      }
+    });
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+    revealTargets.forEach(element => observer.observe(element));
+
+    // Reading progress indicator.
+    const progress = document.getElementById('scrollProgress');
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      progress.style.width = percent + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // Demo behaviour only: connect this form to a backend or CRM before production.
+    document.getElementById('contactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const subject = encodeURIComponent('ORBYT Security enquiry — ' + (data.get('service') || 'General'));
+      const body = encodeURIComponent(
+        'Name: ' + data.get('name') + '\\n' +
+        'Company: ' + data.get('company') + '\\n' +
+        'Email: ' + data.get('email') + '\\n' +
+        'Service: ' + data.get('service') + '\\n\\n' +
+        'Requirements:\\n' + data.get('message')
+      );
+      document.getElementById('formStatus').textContent = 'Your email application will open with the enquiry details. Connect a business email or backend before launch.';
+      window.location.href = 'mailto:hello@orbyt.com?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>

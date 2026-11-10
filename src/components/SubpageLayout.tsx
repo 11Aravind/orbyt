@@ -9,7 +9,7 @@ export function SubpageLayout({ kicker, title, description, children }: {
   return <>
     <Navbar />
     <main>
-      <section className="subpage-hero"><div className="container"><span className="pill">{kicker}</span><h1>{title}</h1><p>{description}</p><Link className="btn btn-lime" href="/contact">Talk to ORBYT <ArrowUpRight size={15}/></Link></div></section>
+      <section className="subpage-hero"><div className="container"><span className="pill">{kicker}</span><h1>{title}</h1><p>{description}</p><Link className="btn btn-lime" href="/contact">Talk to QUBIXS <ArrowUpRight size={15}/></Link></div></section>
       <div className="page-content"><div className="container">{children}</div></div>
     </main>
     <Footer />

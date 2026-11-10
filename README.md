@@ -1,6 +1,6 @@
-# ORBYT Website
+# QUBIXS Website
 
-A frontend-first Next.js website prototype for ORBYT, a technology brand focused on software products, security services and custom development.
+A frontend-first Next.js website prototype for QUBIXS, a technology brand focused on software products, security services and custom development.
 
 ## Stack
 
@@ -23,10 +23,10 @@ Open http://localhost:3000.
 
 - `/`
 - `/products`
-- `/products/orbyt-dine`
-- `/products/orbyt-commerce`
-- `/products/orbyt-stock`
-- `/products/orbyt-flow`
+- `/products/qubixs-dine`
+- `/products/qubixs-commerce`
+- `/products/qubixs-stock`
+- `/products/qubixs-flow`
 - `/services/security`
 - `/services/development`
 - `/about`

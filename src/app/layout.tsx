@@ -15,13 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ORBYT — Build. Secure. Evolve.",
+  title: "QUBIXS — Build. Secure. Evolve.",
   description:
-    "Discover practical software products, digital security services and custom technology solutions with ORBYT.",
+    "Discover practical software products, digital security services and custom technology solutions with QUBIXS.",
   metadataBase: new URL("https://example.com"),
   icons: { icon: "/favicon.svg" },
   openGraph: {
-    title: "ORBYT — Build. Secure. Evolve.",
+    title: "QUBIXS — Build. Secure. Evolve.",
     description: "Software products, security and development for modern businesses.",
     type: "website"
   }

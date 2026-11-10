@@ -2,7 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
   HeroSection, IntroStrip, BrandIntro, FeaturedProducts, ProductCategories,
-  SecuritySection, DevelopmentSection, WhyOrbyt, WorkProcess, CaseStudies,
+  SecuritySection, DevelopmentSection, WhyQubixs, WorkProcess, CaseStudies,
   Testimonials, FAQSection, ContactCTA
 } from "@/components/HomeSections";
 
@@ -17,7 +17,7 @@ export default function HomePage() {
       <ProductCategories />
       <SecuritySection />
       <DevelopmentSection />
-      <WhyOrbyt />
+      <WhyQubixs />
       <WorkProcess />
       <CaseStudies />
       <Testimonials />

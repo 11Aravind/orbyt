@@ -10,7 +10,7 @@ export default function ContactPage() {
     event.preventDefault();
     setSent(true);
   }
-  return <SubpageLayout kicker="Contact ORBYT" title="Tell us what you're working towards." description="Share a little about your product, security or development needs. This prototype form demonstrates the experience; it does not send data to a server yet.">
+  return <SubpageLayout kicker="Contact QUBIXS" title="Tell us what you're working towards." description="Share a little about your product, security or development needs. This prototype form demonstrates the experience; it does not send data to a server yet.">
     <div className="grid-2" style={{alignItems:"start"}}>
       <div><h2 style={{fontSize:28}}>Let&apos;s start a conversation.</h2><p className="section-copy">Choose the area closest to your needs and tell us what a good outcome would look like.</p><div style={{display:"grid",gap:18,marginTop:30}}><div style={{display:"flex",gap:12,alignItems:"center"}}><Code2 color="#6e9347"/><span style={{fontSize:13}}>Software & development</span></div><div style={{display:"flex",gap:12,alignItems:"center"}}><ShieldCheck color="#6e9347"/><span style={{fontSize:13}}>Security services</span></div><div style={{display:"flex",gap:12,alignItems:"center"}}><Mail color="#6e9347"/><span style={{fontSize:13}}>Product information</span></div></div></div>
       <form className="contact-form card" style={{padding:25}} onSubmit={handleSubmit}>
